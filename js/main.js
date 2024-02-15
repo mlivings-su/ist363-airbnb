@@ -33,29 +33,29 @@ closeBtn.addEventListener('click', function () {
 //const roomsArr = [];
 
 //array of objects
-const rooms = [
-  {
-    name: 'Luxury King Room',
-    price: 300,
-    guests: 2,
-    description:
-      'A beatiful room with a king sized bed , private bathroom, and a balcony with a view of the ocean',
-  },
-  {
-    name: 'Luxury King Room',
-    price: 300,
-    guests: 2,
-    description:
-      'A beuatiful room with a king sized bed , private bathroom, and a balcony with a view of the ocean',
-  },
-  {
-    name: 'Luxury King Room',
-    price: 300,
-    guests: 2,
-    description:
-      'A beautiful room with a king sized bed , private bathroom, and a balcony with a view of the ocean',
-  },
-];
+// const rooms = [
+//   {
+//     name: 'Luxury King Room',
+//     price: 300,
+//     guests: 2,
+//     description:
+//       'A beatiful room with a king sized bed , private bathroom, and a balcony with a view of the ocean',
+//   },
+//   {
+//     name: 'Luxury King Room',
+//     price: 300,
+//     guests: 2,
+//     description:
+//       'A beuatiful room with a king sized bed , private bathroom, and a balcony with a view of the ocean',
+//   },
+//   {
+//     name: 'Luxury King Room',
+//     price: 300,
+//     guests: 2,
+//     description:
+//       'A beautiful room with a king sized bed , private bathroom, and a balcony with a view of the ocean',
+//   },
+// ];
 //room ends
 
 function renderProperties(properties) {
@@ -97,6 +97,56 @@ function renderProperties(properties) {
 //     renderProperties(data)
 //   });
 
+const displayCategory = (category, properties) => {
+  //console.log('display category!');
+  const sectionElement = document.createElement('section');
+  sectionElement.classList.add('category');
+
+  const sectionTitle = document.createElement('h2');
+  sectionTitle.textContent = category.label.plural;
+
+  sectionElement.appendChild(sectionTitle);
+  //end of displayCategory
+
+  console.log(category.label.singular);
+
+  // 1. filter properties
+  const filteredProperties = properties.filter((property) => {
+    //return true or false
+    return category.label.singular === property.type;
+  });
+
+  filteredProperties.sort((a, b) => {
+    if (a.name < b.name) {
+      return -1;
+    }
+
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
+  });
+  // console.log({filteredProperties});
+  filteredProperties.forEach((property) => {
+    const articleElement = document.createElement('article');
+    articleElement.classList.add('property');
+
+    let propertyHtml = `
+   <h3 class = "property--title">${property.name}</h3>
+   <p class = "property--description">${property.description}</p>
+   <p class = "property--price">${property.price}</p>`;
+
+    articleElement.innerHTML = propertyHtml;
+
+    selectionElement.appendChild(articleElement);
+  });
+
+  //end of forEach
+
+  //2. appened properties
+  document.body.appendChild(sectionElement);
+};
+
 Promise.all([
   // fetch 1
   fetch('js/properties.json').then((response) => response.json()),
@@ -104,8 +154,8 @@ Promise.all([
   fetch('js/categories.json').then((response) => response.json()),
 ])
   .then(([properties, categories]) => {
-    console.log({ properties });
-    console.log({ categories });
+    //console.log({ properties });
+    //console.log({ categories });
     categories.forEach((category) => {
       displayCategory(category, properties);
     });
@@ -113,16 +163,3 @@ Promise.all([
   .catch((error) => {
     console.error('There was a problem fetching the data:', error);
   });
-
-const displayCategory = (category, properties) => {
-  //console.log('display category!');
-  const sectionElement = document.createElement('section');
-
-  const sectionTitle = document.createElement('h2');
-
-  sectionTitle.textContent = category.label.plural;
-
-  sectionElement.appendChild(sectionElement);
-
-  //end of displayCategory
-};
