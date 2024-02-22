@@ -65,7 +65,7 @@ const displayCategory = (category, properties) => {
 
     articleElement.innerHTML = propertyHtml;
 
-    selectionElement.appendChild(articleElement);
+    sectionElement.appendChild(articleElement);
   });
 
   //end of forEach
