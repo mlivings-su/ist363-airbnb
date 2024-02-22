@@ -1,6 +1,6 @@
 //console.log('filter file ready to go!');
 
-const number = [
+const numbers = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
 ];
 
@@ -43,5 +43,23 @@ const filteredCars = cars.filter((car) => {
 console.log({ filteredCars });
 
 //ex 4
+const filterGames = (games, monthIndex) => {
+  const filteredGames = games.filter((game) => {
+    const dateObject = new Date(game.date);
+    return dateObject.getMonth() === monthIndex;
+  });
+  console.log({ filteredGames }); //filter merhod, forEach, etc. need arrow funct.
+};
+// import scheudle.json
+// thne convert it to json
+// then do something with it
 
-//games only in feb.
+fetch('js/schedule.json')
+  .then((respone) => {
+    return respone.json();
+  })
+  .then((data) => {
+    // console.log({ data });
+    filterGames(data, 1);
+  })
+  .catch(); //promise
