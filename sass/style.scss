@@ -1,37 +1,12 @@
+@use './abstracts/vars';
+@use './base';
+
 @use './header';
 @use './footer';
-$color__orange: #d74100;
-$font__primary: Arial, Verdana, sans-serif;
+@use '.layout';
 
-html,
-body,
-h1,
-h1,
-h2,
-h4,
-h5,
-h6,
-p,
-ul,
-li,
-button {
-  margin: 0;
-  padding: 0;
-  font: inherit;
-}
-ul,
-li {
-  list-style: none;
-}
-* {
-  box-sizing: border-box;
-}
 :root {
   --airbnb-pink: #ff385c;
-}
-
-body {
-  background-color: $color__orange;
 }
 
 .logo {
@@ -47,14 +22,14 @@ nav {
     gap: 1rem;
     li {
       a {
-        font-family: $font__primary;
+        font-family: vars.$font__primary;
         font-weight: bold;
         font-size: 1rem;
         color: black;
         text-decoration: none;
         &:hover,
         &:focus {
-          color: $color__orange;
+          color: vars.$color__orange;
           text-decoration: underline;
         }
       }
