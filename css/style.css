@@ -207,6 +207,28 @@ nav ul li a:hover, nav ul li a:focus {
   font-style: italic;
 }
 
+.slider {
+  background-color: lightblue;
+}
+.slider__container {
+  background-color: limegreen;
+  overflow-x: scroll;
+  padding-left: 1rem;
+}
+.slider__grid {
+  background-color: pink;
+  border: 1px solid red;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300px);
+  gap: 1rem;
+  grid-auto-flow: column;
+}
+.slider__item {
+  background-color: white;
+  width: 300px;
+  height: 400px;
+}
+
 header {
   background-color: pink;
   padding: 1rem;
